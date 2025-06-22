@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">App_movil</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Inicio</string>
+    <string name="menu_gallery">Registro de Acceso</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="acceso">Registro Acceso</string>
+
+    <!--    select para tipo y vuelo-->
+    <string-array name="tipos_array">
+        <item>Seleccione un tipo...</item>
+        <item>limpieza</item>
+        <item>Mantenimiento</item>
+    </string-array>
+    <string-array name="vuelos_array">
+        <item>Seleccione un vuelo...</item>
+        <item>Vuelo 101</item>
+        <item>Vuelo 202</item>
+        <item>Vuelo 303</item>
+    </string-array>
+</resources>

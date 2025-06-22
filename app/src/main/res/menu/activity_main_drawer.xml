@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/acceso" />
+        <!--        para agregar una opcion al menu -->
+<!--        <item-->
+<!--            android:id="@+id/nav_slideshow"-->
+<!--            android:icon="@drawable/ic_menu_slideshow"-->
+<!--            android:title="@string/menu_slideshow" />-->
+
+<!--        <item-->
+<!--            android:id="@+id/nav_my_bids"-->
+<!--            android:icon="@drawable/ic_logout"-->
+<!--            android:title="My bids"/>-->
+<!--        <item-->
+<!--            android:id="@+id/nav_wishlist"-->
+<!--            android:icon="@drawable/ic_logout"-->
+<!--            android:title="Wishlist"/>-->
+<!--        <item-->
+<!--            android:id="@+id/nav_favorite"-->
+<!--            android:icon="@drawable/ic_logout"-->
+<!--            android:title="Favorite"/>-->
+<!--        <item-->
+<!--            android:id="@+id/nav_earning"-->
+<!--            android:icon="@drawable/ic_logout"-->
+<!--            android:title="Earning"/>-->
+<!--        <item android:title="" android:enabled="false"/>-->
+<!--        <item-->
+<!--            android:id="@+id/nav_settings"-->
+<!--            android:icon="@drawable/ic_logout"-->
+<!--            android:title="Settings"/>-->
+<!--        <item-->
+<!--            android:id="@+id/nav_security"-->
+<!--            android:icon="@drawable/ic_logout"-->
+<!--            android:title="Security"/>-->
+<!--        <item android:title="" android:enabled="false"/>-->
+        <!-- El modo oscuro lo hacemos como custom view, ver siguiente paso -->
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Log out"/>
+
+    </group>
+</menu>
