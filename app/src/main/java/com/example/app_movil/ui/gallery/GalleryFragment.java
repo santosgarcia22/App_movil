@@ -120,7 +120,7 @@ public class GalleryFragment extends Fragment {
 
 
     private void enviarNombre(String nombre){
-        String url = "https://292f-2800-b20-1249-6bbf-d71-a2b7-7509-59f0.ngrok-free.app/api/accesos";
+        String url = "https://9f10-201-150-85-19.ngrok-free.app/api/accesos";
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JSONObject postData = new JSONObject();
         try {

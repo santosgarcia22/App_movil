@@ -34,6 +34,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Recuperar el nombre de usuario desde el Intent
+        String nombreUsuario = getIntent().getStringExtra("nombre_usuario");
+
+        // Buscar el TextView donde lo quieres mostrar
+        TextView tvNombreUsuario = findViewById(R.id.tvNombreUsuario); // Asegúrate de tener este TextView en tu XML
+
+        // Mostrar el nombre
+        if (nombreUsuario != null) {
+            tvNombreUsuario.setText(nombreUsuario);
+        }
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
