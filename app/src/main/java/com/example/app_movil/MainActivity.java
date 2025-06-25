@@ -1,5 +1,6 @@
 package com.example.app_movil;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -10,7 +11,9 @@ import android.provider.MediaStore;
 import android.widget.ImageView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.app_movil.ui.LoginActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -25,8 +28,6 @@ import com.example.app_movil.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
@@ -34,45 +35,42 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Recuperar el nombre de usuario desde el Intent
-        String nombreUsuario = getIntent().getStringExtra("nombre_usuario");
-
-        // Buscar el TextView donde lo quieres mostrar
-        TextView tvNombreUsuario = findViewById(R.id.tvNombreUsuario); // Asegúrate de tener este TextView en tu XML
-
-        // Mostrar el nombre
-        if (nombreUsuario != null) {
-            tvNombreUsuario.setText(nombreUsuario);
-        }
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null)
-                        .setAnchorView(R.id.fab).show();
-            }
+        binding.appBarMain.fab.setOnClickListener(view -> {
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null)
+                    .setAnchorView(R.id.fab).show();
         });
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            if (item.getItemId() == R.id.nav_logout) {
+                cerrarSesion();  // Llama el método que te di antes
+                return true;     // ¡IMPORTANTE! Evita la navegación normal para logout
+            }
+            return NavigationUI.onNavDestinationSelected(item, navController)
+                    || super.onSupportNavigateUp();
+        });
+
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setOpenableLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+
+      //  NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -80,7 +78,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration) || super.onSupportNavigateUp();
     }
+
+    private void cerrarSesion() {
+        // Limpia cualquier dato de sesión si lo usas (por ejemplo, SharedPreferences)
+         SharedPreferences preferences = getSharedPreferences("mi_app_prefs", MODE_PRIVATE);
+         preferences.edit().clear().apply();
+
+        // Muestra un mensaje opcional
+        Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
+
+        // Vuelve a la pantalla de login y elimina el historial de actividades
+        Intent intent = new Intent(MainActivity.this, com.example.app_movil.ui.LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
 }
+

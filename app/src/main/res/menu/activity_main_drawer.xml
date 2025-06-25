@@ -45,6 +45,7 @@
 <!--            android:title="Security"/>-->
 <!--        <item android:title="" android:enabled="false"/>-->
         <!-- El modo oscuro lo hacemos como custom view, ver siguiente paso -->
+
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_logout"

@@ -63,14 +63,12 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         boolean success = response.getBoolean("success");
                         if (success) {
-                            JSONObject user = response.getJSONObject("user");
-                            String nombreUsuario = user.getString("nombre_completo"); // usa el campo correcto
-
-                            Toast.makeText(this, "¡Bienvenido!", Toast.LENGTH_SHORT).show();
+                            // Si te da error al pasar el dato
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.putExtra("nombre_usuario", nombreUsuario);
                             startActivity(intent);
                             finish();
+
+
                         } else {
                             Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
                         }

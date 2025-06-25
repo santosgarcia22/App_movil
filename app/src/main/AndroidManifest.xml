@@ -21,10 +21,20 @@
         android:theme="@style/Theme.App_movil"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.App_movil.NoActionBar">
+            <!-- Puedes dejar el intent-filter solo en LoginActivity -->
+        </activity>
+
         <!-- LoginActivity como LAUNCHER -->
         <activity
             android:name=".ui.LoginActivity"
             android:exported="true"
+            android:label="@string/app_name"
             android:theme="@style/Theme.App_movil.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
