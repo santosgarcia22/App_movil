@@ -21,17 +21,11 @@ import org.json.JSONException;
 
 import java.util.HashMap;
 import java.util.Map;
-
-
 public class LoginActivity extends AppCompatActivity {
 
     // Declara aquí las variables
     EditText etUsername, etPassword;
     Button btnLogin;
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +38,8 @@ public class LoginActivity extends AppCompatActivity {
 
         btnLogin.setOnClickListener(v -> loginUser());
     }
-
     private void loginUser() {
-        String url = "https://9f10-201-150-85-19.ngrok-free.app/api/login-app";
+        String url = "https://423de8bfcbf4.ngrok-free.app/api/login-app";
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
         JSONObject postData = new JSONObject();
@@ -56,45 +49,49 @@ public class LoginActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, postData,
                 response -> {
                     Log.d("LOGIN_RESPONSE", response.toString()); // <-- AGREGA ESTO
                     try {
                         boolean success = response.getBoolean("success");
                         if (success) {
+
                             // Si te da error al pasar el dato
+                            JSONObject user = response.getJSONObject("user");
+                            String nombreUsuario = user.getString("nombre_completo"); // o "usuario"
+
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("nombre_usuario", nombreUsuario); // PASAS EL NOMBRE!
                             startActivity(intent);
                             finish();
-
-
                         } else {
-                            Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+                            // ¡Muestra el mensaje bonito!
+                            String msg = response.has("message") ? response.getString("message") : "Credenciales incorrectas";
+                            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(this, "Error JSON: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Error en la respuesta del servidor", Toast.LENGTH_SHORT).show();
                     }
                 },
-                error -> {
-                    String errorMsg = "";
-                    if (error.networkResponse != null) {
-                        errorMsg = "Status code: " + error.networkResponse.statusCode;
-                        if (error.networkResponse.data != null) {
-                            errorMsg += ", body: " + new String(error.networkResponse.data);
+                error ->  {
+                    // Aquí puedes mejorar el mensaje según el tipo de error:
+                    String errorMsg = "Error de conexión";
+                    if (error.networkResponse != null && error.networkResponse.data != null) {
+                        // Intenta leer el mensaje devuelto por el backend
+                        try {
+                            String body = new String(error.networkResponse.data, "UTF-8");
+                            JSONObject obj = new JSONObject(body);
+                            if (obj.has("message")) {
+                                errorMsg = obj.getString("message");
+                            }
+                        } catch (Exception e) {
+                            // Si no es JSON, ignora
                         }
-                    } else {
-                        errorMsg = error.toString();
                     }
-                    Log.e("LOGIN_ERROR", errorMsg); // <-- AGREGA ESTO
-                    Toast.makeText(this, "Error en la conexión: " + errorMsg, Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, errorMsg, Toast.LENGTH_LONG).show();
                 }
         );
         queue.add(request);
     }
-
-
-
-
 }

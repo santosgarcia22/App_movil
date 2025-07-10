@@ -15,26 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/tvNombreUsuario"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Usuario"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textSize="18sp"-->
-<!--        android:layout_marginTop="16dp"-->
-<!--        android:layout_gravity="center_horizontal" />-->
-
-    <TextView
-        android:id="@+id/tvBienvenida"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bienvenido"
-        android:textSize="22sp"
-        android:layout_marginTop="32dp"
-        android:layout_gravity="center" />
-
-
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"

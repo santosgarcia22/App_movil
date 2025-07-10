@@ -120,7 +120,7 @@ public class GalleryFragment extends Fragment {
 
 
     private void enviarNombre(String nombre){
-        String url = "https://9f10-201-150-85-19.ngrok-free.app/api/accesos";
+        String url = "https://423de8bfcbf4.ngrok-free.app/api/accesos";
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JSONObject postData = new JSONObject();
         try {
@@ -147,7 +147,15 @@ public class GalleryFragment extends Fragment {
                 Request.Method.POST,
                 url,
                 postData,
-                response -> Toast.makeText(getContext(), "¡Registro enviado!", Toast.LENGTH_SHORT).show(),
+                response -> {
+                    Toast.makeText(getContext(), "¡Registro enviado!", Toast.LENGTH_SHORT).show();
+                //limpiar el campo nomnbre
+                etNombre.setText("");
+
+                //Limpiar la imagen a vacia
+                imageView.setImageDrawable(null);
+                currentBitmap = null;
+                 },
                 error -> Toast.makeText(getContext(), "Error al enviar: " + error.getMessage(), Toast.LENGTH_SHORT).show()
         );
         queue.add(jsonObjectRequest);
