@@ -33,14 +33,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+       String idUsuario = getIntent().getStringExtra("id_usuario");
+       String nombreUsuario = getIntent().getStringExtra("nombre_completo");
+
+        //Guardar en SharedPreferences
+
+        SharedPreferences prefs = getSharedPreferences("TUS_PREFS", MODE_PRIVATE );
+        prefs.edit().putString("id_usuario", idUsuario )
+                .putString("nombre_completo", nombreUsuario )
+                .apply();
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        String nombreUsuario = getIntent().getStringExtra("nombre_completo");
+
+       // NavigationView navigationView = findViewById(R.id.nav_view);
         NavigationView navigationView = binding.navView;
         View headerView = navigationView.getHeaderView(0);
-        TextView textViewName  = findViewById(R.id.textViewName);
-        if (nombreUsuario != null && !nombreUsuario.isEmpty())
+        TextView textViewName  = headerView.findViewById(R.id.textViewName);
+
+        //String nombreUsuario = getIntent().getStringExtra("nombre_completo");
+        Toast.makeText(this, "Usuario recibido: " + nombreUsuario, Toast.LENGTH_LONG).show();
+        if (nombreUsuario != null)
         {
            textViewName.setText(nombreUsuario);
         }
@@ -57,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
        // NavigationView navigationView = binding.navView;
 
-        // ----- PON EL LISTENER DESPUÉS DE setupWithNavController -----
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery)
                 .setOpenableLayout(drawer)
@@ -66,18 +79,18 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        // ---- AGREGA AQUÍ EL LISTENER PERSONALIZADO ----
+
         navigationView.setNavigationItemSelectedListener(item -> {
             if (item.getItemId() == R.id.nav_logout) {
                 Toast.makeText(this, "Cerrando sesión..." + item.getItemId(), Toast.LENGTH_SHORT).show();
                 // Margen de tiempo de 1 segundo (1000 ms)
                 new android.os.Handler().postDelayed(() -> {
                     cerrarSesion();
-                }, 1500);
+                }, 1000);
                 binding.drawerLayout.closeDrawers();
                 return true;
             }
-            // Para los demás items, navega normalmente
+
             return NavigationUI.onNavDestinationSelected(item, navController);
         });
     }
@@ -94,16 +107,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void cerrarSesion() {
         Toast.makeText(this, "Cerrando sesión......", Toast.LENGTH_SHORT).show();
-        // Si usas SharedPreferences para guardar datos de usuario, límpialos aquí.
+
          SharedPreferences prefs = getSharedPreferences("TU_PREFS", MODE_PRIVATE);
          prefs.edit().clear().apply();
 
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        // El FLAG borra todas las actividades previas, así no pueden volver con back
+
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
     }
+
+
 
 
 }

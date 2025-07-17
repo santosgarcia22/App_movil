@@ -35,6 +35,8 @@ android {
         implementation("com.squareup.okhttp3:okhttp:4.9.3")
         implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
         implementation("com.facebook.stetho:stetho-okhttp3:1.6.0")
+        implementation ("com.google.code.gson:gson:2.10")
+
         // otras dependencias...
     }
 
@@ -59,6 +61,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
 
 
 }
