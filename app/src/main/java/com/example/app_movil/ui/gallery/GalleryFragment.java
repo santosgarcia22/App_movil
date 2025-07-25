@@ -140,7 +140,7 @@ public class GalleryFragment extends Fragment {
 
 
     private void enviarNombre(String nombre){
-        String url = "https://b72374f2f4a7.ngrok-free.app/api/accesos";
+        String url = "http://192.168.21.90:8080/api/accesos";
         RequestQueue queue = Volley.newRequestQueue(getContext());
         JSONObject postData = new JSONObject();
         try {
@@ -226,7 +226,7 @@ public class GalleryFragment extends Fragment {
     }
 
     private void cargarTipos() {
-        String url = "https://b72374f2f4a7.ngrok-free.app/api/tipo";
+        String url = "http://192.168.21.90:8080/api/tipo";
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
 
@@ -278,7 +278,7 @@ public class GalleryFragment extends Fragment {
                 dummyVuelo.nombre = "Selecciona un vuelo...";
                 listaVuelos.add(dummyVuelo);
 
-                String url = "https://b72374f2f4a7.ngrok-free.app/api/vuelo";
+                String url = "http://192.168.21.90:8080/api/vuelo";
                 RequestQueue queue = Volley.newRequestQueue(getContext());
 
 

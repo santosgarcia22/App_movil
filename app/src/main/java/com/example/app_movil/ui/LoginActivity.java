@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(v -> loginUser());
     }
     private void loginUser() {
-        String url = "https://b72374f2f4a7.ngrok-free.app/api/login-app";
+        String url = "http://192.168.21.90:8080/api/login-app";
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
         JSONObject postData = new JSONObject();

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA">
+    <!-- Fondo curvo (puede ser imagen SVG/PNG)
+             android:src="@drawable/fondo_curvo"
+     -->
+    <ImageView
+        android:id="@+id/imgHeader"
+        android:layout_width="407dp"
+        android:layout_height="220dp"
+        android:background="#C62828"
+        android:scaleType="fitXY"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Logo
+        android:background="@drawable/ic_logout"
+        -->
+    <!-- Logo
+  android:background="@drawable/circle_white_bg"
+     -->
+
+    <!-- Texto Bienvenida -->
+
+    <!-- Usuario -->
+
+    <!-- Contraseña -->
+
+    <!-- Botón login -->
+
+    <!-- Logo -->
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="213dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="68dp"
+        android:elevation="6dp"
+        android:src="@drawable/logo_empresa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:text="¡Bienvenido de nuevo!"
+        android:textColor="#C62828"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/imgLogo" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:background="#EEEEEE"
+        android:hint="Usuario"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/tvWelcome"
+        app:layout_constraintWidth_percent="0.85" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
+        android:background="#EEEEEE"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="@id/etUsername"
+        app:layout_constraintStart_toStartOf="@id/etUsername"
+
+        app:layout_constraintTop_toBottomOf="@id/etUsername" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="#C62828"
+        android:text="Iniciar sesión"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@id/etUsername"
+        app:layout_constraintStart_toStartOf="@id/etUsername"
+        app:layout_constraintTop_toBottomOf="@id/etPassword" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
